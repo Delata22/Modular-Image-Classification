@@ -1,0 +1,6 @@
+# configs/model/vit_irm.yaml
+_target_: src.models.mnist_lit_model.LitMNISTModel # On peut réutiliser le LitMNISTModel !
+
+model_name: "google/vit-base-patch16-224-in21k"
+lr: 0.0001
+num_classes: null # <-- SERA REMPLI AUTOMATIQUEMENT PAR train.py

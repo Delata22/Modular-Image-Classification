@@ -1,0 +1,28 @@
+services:
+  app:
+    image: mon-image-mnist:1.0
+    build: .
+    container_name: mnist-app
+    volumes:
+      - ./src:/app/src
+      - ./configs:/app/configs
+      - ./data:/app/data
+      - ./outputs:/app/outputs
+      - ./out:/app/out
+      - ./test_images:/app/test_images
+      - ./raw_data:/app/raw_data
+    
+    ports:
+      - "6006:6006"
+
+    shm_size: '2gb'
+
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+  
+    command: tail -f /dev/null

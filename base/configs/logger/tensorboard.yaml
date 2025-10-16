@@ -1,0 +1,12 @@
+# configs/logger/tensorboard.yaml
+
+tensorboard:
+  _target_: lightning.pytorch.loggers.TensorBoardLogger
+  
+  save_dir: ${hydra:run.dir}
+  
+
+  name: "lightning_logs"
+  version: ""
+
+  log_graph: false

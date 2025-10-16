@@ -1,0 +1,19 @@
+# configs/data/mnist.yaml
+
+# Cible la classe que nous avons créée
+_target_: src.data.mnist_datamodule.MNISTDataModule
+
+# Ces clés correspondent EXACTEMENT aux arguments de __init__ de notre DataModule
+data_dir: /app/data/ # Le chemin à l'intérieur du conteneur
+batch_size: 64
+num_workers: 4
+
+transform:
+  _target_: torchvision.transforms.Compose
+  transforms:
+    - _target_: torchvision.transforms.Resize
+      size: [224, 224] # MUST be modified if the model is changed. These dimensions must correspond to the input dimensions of the model
+    - _target_: torchvision.transforms.ToTensor
+    - _target_: torchvision.transforms.Normalize
+      mean: [0.1307] # MNIST est en 1 canal
+      std: [0.3081]

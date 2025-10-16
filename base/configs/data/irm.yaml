@@ -1,0 +1,18 @@
+# configs/data/irm.yaml
+_target_: src.data.irm_datamodule.IRMDataModule
+
+data_root_dir: /app/data
+metadata_dir: metadata_detailed # Le nom du dossier contenant les .parquet
+batch_size: 16 # Plus petit pour commencer
+num_workers: 8
+
+transform:
+  _target_: torchvision.transforms.Compose
+  transforms:
+    # Pas besoin de Grayscale car on fait .convert("RGB") dans le Dataset
+    - _target_: torchvision.transforms.Resize
+      size: [224, 224]
+    - _target_: torchvision.transforms.ToTensor
+    - _target_: torchvision.transforms.Normalize
+      mean: [0.485, 0.456, 0.406]
+      std: [0.229, 0.224, 0.225]

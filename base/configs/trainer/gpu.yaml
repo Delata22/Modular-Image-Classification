@@ -1,0 +1,12 @@
+# configs/trainer/gpu.yaml
+
+_target_: lightning.pytorch.trainer.Trainer
+
+default_root_dir: ${hydra:run.dir}
+
+accelerator: gpu
+devices: 1
+max_epochs: 10 # Entraînons pour 10 époques pour commencer
+
+# Pour du débogage rapide, décommentez la ligne suivante
+#fast_dev_run: true

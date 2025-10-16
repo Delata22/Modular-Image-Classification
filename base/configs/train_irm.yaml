@@ -1,0 +1,10 @@
+# configs/train_irm.yaml
+defaults:
+  - _self_
+  - data: irm
+  - model: vit_irm
+  - trainer: gpu
+  - callbacks: default
+  - logger: tensorboard
+
+seed: 42

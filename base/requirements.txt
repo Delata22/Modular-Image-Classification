@@ -1,0 +1,11 @@
+torchvision
+lightning[extra]
+hydra-core
+omegaconf
+transformers
+rich
+pandas
+pyarrow
+tensorboard
+scikit-learn
+pyyaml
