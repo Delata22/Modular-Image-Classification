@@ -1,0 +1,15 @@
+# configs/model/default.yaml
+
+# On cible directement notre LitModel
+_target_: src.models.lit_model.LitModel
+
+# --- Paramètres pour notre LitModel ---
+
+# Le CHAMP pour choisir le modèle HF, avec une valeur par défaut
+model_name: "google/vit-base-patch16-224-in21k"
+
+# Sera rempli dynamiquement par train.py
+num_classes: null 
+
+# Hyperparamètres d'entraînement
+lr: 0.0001

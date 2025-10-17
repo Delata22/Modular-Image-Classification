@@ -1,0 +1,26 @@
+# configs/data/default.yaml
+
+# On définit notre variable intermédiaire pour la taille de l'image
+# --- Configuration du DataModule ---
+_target_: src.data.datamodule.ParquetDataModule
+
+data_root_dir: /app/data/metadata
+metadata_dir: ${ds}
+
+batch_size: 16
+num_workers: 8
+
+# --- ON REMET LA DÉFINITION COMPLÈTE DES TRANSFORMATIONS ICI ---
+transform:
+  _target_: torchvision.transforms.Compose
+  transforms:
+    #- _target_: torchvision.transforms.Resize
+      # On utilise notre variable pour la taille dynamique
+     # size:
+      #  - ${image_size}
+       # - ${image_size}
+    
+    - _target_: torchvision.transforms.ToTensor
+    - _target_: torchvision.transforms.Normalize
+      mean: [0.485, 0.456, 0.406]
+      std: [0.229, 0.224, 0.225]

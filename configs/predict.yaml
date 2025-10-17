@@ -1,0 +1,29 @@
+# configs/predict.yaml
+
+# Section dédiée aux paramètres de prédiction
+predict:
+  # Le chemin vers le DOSSIER du modèle entraîné (ex: models/MR/default/2025-10-16_15-29-01)
+  # On le met obligatoire pour forcer l'utilisateur à le spécifier.
+  # Dossier contenant les images à prédire
+  input_dir: "/app/input"
+
+  # Dossier où seront sauvegardés les fichiers JSON de résultats
+  output_dir: "/app/out"
+
+
+defaults:
+  - _self_
+  # On désactive les logs de Hydra pour ce script, car ce n'est pas une expérience
+  - override hydra/job_logging: disabled
+  - override hydra/hydra_logging: disabled
+
+
+hydra:
+  run:
+    # Exécute le script depuis le répertoire de lancement (la racine du projet)
+    # et NE CRÉE PAS de sous-dossier horodaté.
+    dir: .
+  output_subdir: null
+
+md : ??? # path to the model
+file : null # path to a single file, if filled it will ignore the content of the input directory

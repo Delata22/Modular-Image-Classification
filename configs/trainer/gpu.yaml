@@ -1,0 +1,7 @@
+# configs/trainer/gpu.yaml
+
+_target_: lightning.pytorch.trainer.Trainer
+
+accelerator: gpu
+devices: 1
+max_epochs: 50 # Une valeur par défaut pour un entraînement complet

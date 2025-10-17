@@ -9,3 +9,5 @@ pyarrow
 tensorboard
 scikit-learn
 pyyaml
+seaborn
+matplotlib

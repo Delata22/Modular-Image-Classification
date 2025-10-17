@@ -1,0 +1,23 @@
+# configs/train.yaml
+
+defaults:
+  - _self_
+  - data: default
+  - model: default      # On charge notre config de modèle unifiée
+  - trainer: gpu
+  - logger: tensorboard
+  - callbacks: default
+
+category: "default"
+
+# Il n'y a plus de section 'lit_model' ici !
+
+hydra:
+  run:
+    dir: models/${data.metadata_dir}/${category}/${now:%Y-%m-%d}/${now:%H-%M-%S}
+  
+#image_size: ${get_image_size:${model.model_name}}
+
+seed: 42
+
+ds: ???

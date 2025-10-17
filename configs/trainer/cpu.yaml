@@ -1,0 +1,8 @@
+# configs/trainer/cpu.yaml
+
+_target_: lightning.pytorch.trainer.Trainer
+
+# On spécifie explicitement que l'accélérateur est le CPU
+accelerator: cpu
+
+max_epochs: 50

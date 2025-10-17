@@ -1,22 +1,23 @@
 services:
   app:
-    image: mon-image-mnist:1.0
+    image: modular-ai:1.0
     build: .
-    container_name: mnist-app
+    container_name: modular-ai-app
     volumes:
       - ./src:/app/src
-      - ./configs:/app/configs
       - ./data:/app/data
-      - ./outputs:/app/outputs
+      - ./configs:/app/configs
+      - ./models:/app/models
       - ./out:/app/out
-      - ./test_images:/app/test_images
-      - ./raw_data:/app/raw_data
+      - ./input:/app/input
+      
     
     ports:
-      - "6006:6006"
+      - "6006:6006" # for tensorboard
 
     shm_size: '2gb'
 
+    #comment the entire deploy section if you do not have a NVIDIA GPU
     deploy:
       resources:
         reservations:

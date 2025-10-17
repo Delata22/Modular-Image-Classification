@@ -1,9 +1,0 @@
-# configs/model/vit_mnist.yaml
-
-# Cible la classe que nous avons créée
-_target_: src.models.mnist_lit_model.LitMNISTModel
-
-# Ces clés correspondent EXACTEMENT aux arguments de __init__ de notre LightningModule
-model_name: "google/vit-base-patch16-224-in21k"
-num_classes: 10
-lr: 0.0001 # Un learning rate plus faible est souvent meilleur pour le fine-tuning
