@@ -176,9 +176,7 @@ You can also specify the model directly in the command-line :
 docker exec modular-ai-app python -m src.train ds=EXAMS model.model_name=NEW_MODEL
 ```
 
-You can chose any model from Hugging Face as long as it comes from the **Image Feature Extraction** or the **Image Classification** category.
-
-Here is the link to Hugging Face models : https://huggingface.co/models
+You can chose any model from [Hugging Face](https://huggingface.co/models) as long as it comes from the **Image Feature Extraction** or the **Image Classification** category.
 
 The default model is **google/vit-base-patch16-224-in21k** for its good performance and training speed.
 
