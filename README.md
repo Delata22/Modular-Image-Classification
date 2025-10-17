@@ -146,9 +146,9 @@ Note that the GPU will automatically be used if available, but is not necessary 
 For each image in the **input/** folder, a corresponding json file will be created, with the top 3 predictions of the AI, their probabilities and the path of the original image.
 
 
-### [TRAINING] Advanced customization
+## [TRAINING] Advanced customization
 
-#### Model category
+### Model category
 
 By default, your model will be saved in the following directory:
 
@@ -164,7 +164,7 @@ This model will be saved in
 
 **models/DATASET_NAME/my_category/YYYY-MM-DD/hh-mm-ss** 
 
-#### Model customization
+### Model customization
 
 You can change the model used for the training by changing the variable **model_name** in **configs/model/default.yaml**.
 You can also specify the model directly in the command-line :
@@ -179,7 +179,7 @@ Here is the link to Hugging Face models : [text](https://huggingface.co/models)
 
 The default model is **google/vit-base-patch16-224-in21k** for its good performance and training speed.
 
-#### Hyperparameters customization
+### Hyperparameters customization
 
 Similarly to the model customization, you can change the learning rate by changing the variable **lr** in **configs/model/default.yaml**.
 Or in the command-line:
@@ -188,7 +188,7 @@ Or in the command-line:
 docker exec modular-ai-app python -m src.train ds=EXAMS model.lr=NEW_LR
 ```
 
-#### CPU training
+### CPU training
 
 While it is not advised due to the low speed of CPUs, you can train a model on CPU.
 To do so, simply modify the defaults.trainer value in **configs/callbacks/default.yaml** to "cpu"
@@ -199,7 +199,7 @@ Or in the command-line:
 docker exec modular-ai-app python -m src.train ds=EXAMS trainer=cpu
 ```
 
-#### Training strategy
+### Training strategy
 
 By default, the training strategy consists of tracking the accuracy of the validation set **val_acc** and continuing the training while this value increases.
 If this value stops increasing for 3 epochs in a row, the training will be stopped. 
@@ -207,7 +207,7 @@ This behavior is defined in **configs/callbacks/default.yaml** and can be disabl
 
 The maximum number of epochs is defined in **configs/trainer/gpu.yaml** (or **configs/trainer/cpu.yaml** if you are using cpu) and can be modified.
 
-#### Checkpoint strategy
+### Checkpoint strategy
 
 By default, the training process will select the best performing version of the model based on the **val_acc** metric.
 To do so, at every epoch, the current **val_acc** will be computed and compared to the **val_acc** of the previous best model. 
