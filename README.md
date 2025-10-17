@@ -109,8 +109,8 @@ You can also check the performance of the model on the validation set by looking
 
 Finally, you can use tensorboard to have more in-depth evaluation on the models performance:
 
-    1.  Start the TensorBoard server: `docker exec -d modular-ai-app tensorboard --logdir models --bind_all`
-    2.  Open your browser and navigate to **`http://localhost:6006`**. Here you can watch your model's performance (like `val_acc` and `train_loss`) update in real-time.
+1.  Start the TensorBoard server: `docker exec -d modular-ai-app tensorboard --logdir models --bind_all`
+2.  Open your browser and navigate to **`http://localhost:6006`**. Here you can watch your model's performance (like `val_acc` and `train_loss`) update in real-time.
 
 ## [INFERENCE]: Testing an existing Model
 
