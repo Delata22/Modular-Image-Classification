@@ -1,4 +1,4 @@
-# Fichier: src/utils/transforms_factory.py
+# File: src/utils/transforms_factory.py
 
 from omegaconf import DictConfig
 import hydra
@@ -8,38 +8,38 @@ from rich import print
 
 def get_image_size_from_model_name(model_name: str) -> int:
     """
-    Charge la config d'un modèle Hugging Face et retourne la taille d'image attendue.
+    Loads the config of a Hugging Face model and returns the expected image size.
     """
     try:
         model_config = AutoConfig.from_pretrained(model_name)
         image_size = model_config.image_size
-        print(f"--> Taille d'image attendue par le modèle '{model_name}': [yellow]{image_size}x{image_size}[/yellow]")
+        print(f"--> Expected image size for model '{model_name}': [yellow]{image_size}x{image_size}[/yellow]")
         return image_size
     except Exception:
-        print(f"[yellow]AVERTISSEMENT : Impossible de déterminer la taille d'image pour '{model_name}'. Utilisation de 224 par défaut.[/yellow]")
+        print(f"[yellow]WARNING: Could not determine image size for '{model_name}'. Defaulting to 224.[/yellow]")
         return 224
 
 def build_dynamic_transforms(static_transforms_cfg: DictConfig, model_name: str) -> T.Compose:
     """
-    Construit la chaîne de transformation complète en ajoutant dynamiquement le Resize.
+    Builds the complete transformation chain by dynamically adding the Resize transform.
     
     Args:
-        static_transforms_cfg: La partie de la config Hydra contenant les transformations statiques.
-        model_name: Le nom du modèle Hugging Face pour déterminer la taille de l'image.
+        static_transforms_cfg: The part of the Hydra config containing the static transformations.
+        model_name: The name of the Hugging Face model to determine the image size.
         
     Returns:
-        Un objet torchvision.transforms.Compose complet.
+        A complete torchvision.transforms.Compose object.
     """
-    # 1. On détermine la taille de l'image
+    # 1. Determine the image size
     image_size = get_image_size_from_model_name(model_name)
 
-    # 2. On instancie la partie STATIQUE des transformations depuis la config
+    # 2. Instantiate the STATIC part of the transformations from the config
     static_transforms = hydra.utils.instantiate(static_transforms_cfg)
     
-    # 3. On construit la chaîne de transformation COMPLÈTE en Python
+    # 3. Build the COMPLETE transformation chain in Python
     full_transform = T.Compose([
-        T.Resize((image_size, image_size)), # Le Resize dynamique
-        *static_transforms.transforms     # On déballe la liste des transforms statiques
+        T.Resize((image_size, image_size)), # The dynamic Resize
+        *static_transforms.transforms     # Unpack the list of static transforms
     ])
     
     return full_transform

@@ -1,4 +1,4 @@
-# Fichier: src/train.py (Version finale, propre et dynamique)
+# File: src/train.py (Final, clean, and dynamic version)
 
 import hydra
 import lightning as L
@@ -8,8 +8,9 @@ from rich import print
 import sys
 from src.utils.transforms_resolver import build_dynamic_transforms
 from src.data.prep_dataset import prepare_dataset
-# Imports nécessaires pour que Hydra puisse trouver les classes cibles
-# même si elles ne sont pas directement appelées dans ce fichier.
+
+# Imports needed for Hydra to find the target classes
+# even if they are not directly called in this file.
 from src.data.datamodule import ParquetDataModule
 from src.models.lit_model import LitModel
 from transformers import AutoConfig
@@ -18,13 +19,13 @@ from transformers import AutoConfig
 @hydra.main(version_base="1.3", config_path="../configs", config_name="train.yaml")
 def main(cfg: DictConfig) -> None:
     """
-    Fonction principale d'entraînement, pilotée par Hydra.
+    Main training function, driven by Hydra.
     """
 
-    print(f"Using dataset :[bold blue] {cfg.ds} [/bold blue] ")
-    print(f"Using model '{cfg.model.model_name}' ")
+    print(f"Using dataset: [bold blue]{cfg.ds}[/bold blue]")
+    print(f"Using model: '{cfg.model.model_name}'")
 
-    # Active les optimisations pour les Tensor Cores des GPUs modernes
+    # Enables optimizations for modern GPU Tensor Cores
     if torch.cuda.is_available():
         print("GPU detected, using it to full capabilities")
         torch.set_float32_matmul_precision('high')
@@ -33,24 +34,24 @@ def main(cfg: DictConfig) -> None:
 
     print("--> Creating metadata")
     prepare_dataset(dataset_name=cfg.ds)
-    # Fixe la graine aléatoire pour garantir la reproductibilité des expériences
+    # Sets the random seed to ensure experiment reproducibility
     L.seed_everything(cfg.seed)
 
-    # --- 1. Instanciation dynamique des composants ---
+    # --- 1. Dynamic component instantiation ---
     full_transform = build_dynamic_transforms(
         static_transforms_cfg=cfg.data.transform,
         model_name=cfg.model.model_name
     )
 
-    # 2. On instancie le DataModule en lui passant la transformation complète
-    print("--> Instanciation du DataModule...")
+    # 2. We instantiate the DataModule, passing it the complete transformation
+    print("--> Instantiating DataModule...")
     datamodule = hydra.utils.instantiate(cfg.data, transform=full_transform)
     
-    # On exécute 'prepare_data' manuellement pour forcer la lecture du fichier data_info.yaml
-    # et découvrir le nombre de classes avant d'instancier le modèle.
+    # We manually run 'prepare_data' to force reading the data_info.yaml file
+    # and discover the number of classes before instantiating the model.
     datamodule.prepare_data()
 
-    # On met à jour la configuration du modèle avec le nombre de classes découvert
+    # We update the model configuration with the discovered number of classes
     print(f"--> Discovered {datamodule.num_classes} classes from data_info.yaml")
     cfg.model.num_classes = datamodule.num_classes
     
@@ -76,7 +77,7 @@ def main(cfg: DictConfig) -> None:
         logger=logger_list
     )
 
-    # --- 2. Lancement de l'entraînement et du test ---
+    # --- 2. Launching training and testing ---
 
     print("--> Starting Training!")
     trainer.fit(model=model, datamodule=datamodule, ckpt_path=cfg.get("ckpt_path"))

@@ -1,15 +1,12 @@
 # configs/model/default.yaml
 
-# On cible directement notre LitModel
 _target_: src.models.lit_model.LitModel
 
-# --- Paramètres pour notre LitModel ---
-
-# Le CHAMP pour choisir le modèle HF, avec une valeur par défaut
+# Name of the model on hugging face
 model_name: "google/vit-base-patch16-224-in21k"
 
-# Sera rempli dynamiquement par train.py
+# Automatically filled when discovering the dataset
 num_classes: null 
 
-# Hyperparamètres d'entraînement
+# Default learning rate
 lr: 0.0001

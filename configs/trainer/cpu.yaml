@@ -2,7 +2,6 @@
 
 _target_: lightning.pytorch.trainer.Trainer
 
-# On spécifie explicitement que l'accélérateur est le CPU
 accelerator: cpu
 
-max_epochs: 50
+max_epochs: 50 # Modify this value if needed

@@ -1,3 +1,6 @@
+#configs/callbacks/default.yaml
+
+#checkpoint strategy
 model_checkpoint:
   _target_: lightning.pytorch.callbacks.ModelCheckpoint
   
@@ -8,18 +11,17 @@ model_checkpoint:
   monitor: "val_acc"
   mode: "max"
 
-  every_n_epochs: 1
+  every_n_epochs: 1 # Checks every epoch if the new model is better than the old one
 
-  save_top_k: 1
+  save_top_k: 1     # Do not change this, otherwise the inference 
   save_last: false
-
 
 early_stopping:
   _target_: lightning.pytorch.callbacks.EarlyStopping
   
   monitor: "val_acc" 
   mode: "max"
-  patience: 3
+  patience: 3 # After this much epochs, the training will stop
   verbose: true
 
 test_evaluator:
