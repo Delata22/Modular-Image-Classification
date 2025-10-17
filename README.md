@@ -1,4 +1,4 @@
-# Modular Image Classification Framework for TELEMIS by Gurvan Estable
+# Modular Image Classification Framework by Gurvan Estable
 
 This project provides a robust and flexible architecture for training and using image classification models. Built on Docker, PyTorch Lightning, and Hydra, it is designed to be highly modular, allowing you to experiment with different datasets and model architectures with minimal friction.
 
@@ -79,9 +79,9 @@ With a dataset called EXAMS of two classes (good, bad), the architecture will lo
     └── raw_data/                  
         └── EXAMS/             
             ├── good          
-            |     ├── good_image_1.jpg  
-            |     ├── ...
-            |     └── good_image_n.jpg 
+            |   ├── good_image_1.jpg  
+            |   ├── ...
+            |   └── good_image_n.jpg 
             └── bad
                 ├── bad_image_1.jpg  
                 ├── ...
@@ -109,8 +109,8 @@ You can also check the performance of the model on the validation set by looking
 
 Finally, you can use tensorboard to have more in-depth evaluation on the models performance:
 
-    1.  Start the TensorBoard server: `docker exec -d modular-ai-app tensorboard --logdir models --bind_all`
-    2.  Open your browser and navigate to **`http://localhost:6006`**. Here you can watch your model's performance (like `val_acc` and `train_loss`) update in real-time.
+1.  Start the TensorBoard server: `docker exec -d modular-ai-app tensorboard --logdir models --bind_all`
+2.  Open your browser and navigate to **`http://localhost:6006`**. Here you can watch your model's performance (like `val_acc` and `train_loss`) update in real-time.
 
 ## [INFERENCE]: Testing an existing Model
 
@@ -123,7 +123,7 @@ First of all, put the images you want to use the model on in the **input/** fold
 After training, you will see at the end of the log a line like this:
 
 ```bash
-"Your model as been saved in the models/XXXX/XXXX/XXXX-XX-XX/XX-XX-XX directory"
+"Your model as been saved in the models/DATASET/CATEGORY/YY-MM-DD/hh-mm-ss directory"
 ```
 
 Copy the path said directory
@@ -133,7 +133,7 @@ Copy the path said directory
 Write the following command:
 
 ```bash
-docker exec modular-ai-app python -m src.predict md=models/XXXX/XXXX/XXXX-XX-XX/XX-XX-XX
+docker exec modular-ai-app python -m src.predict md=models/DATASET/CATEGORY/YY-MM-DD/hh-mm-ss
 ```
 
 Although not recommended, you can also directly put the model path in the **md** variable in the **configs/predict.yaml** file and simply write :
@@ -176,9 +176,7 @@ You can also specify the model directly in the command-line :
 docker exec modular-ai-app python -m src.train ds=EXAMS model.model_name=NEW_MODEL
 ```
 
-You can chose any model from Hugging Face as long as it comes from the **Image Feature Extraction** or the **Image Classification** category.
-
-Here is the link to Hugging Face models : [text](https://huggingface.co/models)
+You can chose any model from [Hugging Face](https://huggingface.co/models) as long as it comes from the **Image Feature Extraction** or the **Image Classification** category.
 
 The default model is **google/vit-base-patch16-224-in21k** for its good performance and training speed.
 
@@ -226,19 +224,19 @@ You can change the checkpoint strategy in the **configs/callbacks/default.yaml**
 If you want to make a prediction of a single file without moving it to the **input/** folder, you can do so by specifying its path in the command like this:
 
 ```bash
-docker exec modular-ai-app python -m src.predict md=models/XXXX/XXXX/XXXX-XX-XX/XX-XX-XX file=FILE_PATH
+docker exec modular-ai-app python -m src.predict md=models/DATASET/CATEGORY/YY-MM-DD/hh-mm-ss file=FILE_PATH
 ```
 
 In which case the **input/** folder will not be used for prediction.
 Like before, you can also directly put the filepath in the **configs/predict.yaml** file and remove the file argument from the command :
 
 ```bash
-docker exec modular-ai-app python -m src.predict md=models/XXXX/XXXX/XXXX-XX-XX/XX-XX-XX
+docker exec modular-ai-app python -m src.predict md=models/DATASET/CATEGORY/YY-MM-DD/hh-mm-ss
 ```
 
 ### Model sharing
 
-You can directly share a trained model to someone else possessing this script by copying the **models/XXXX/XXXX/XXXX-XX-XX/XX-XX-XX** folder.
+You can directly share a trained model to someone else possessing this script by copying the **models/DATASET/CATEGORY/YY-MM-DD/hh-mm-ss** folder.
 Then the receiver can put it back where he wants in the **models** folder, renaming it if he wants to, and use the following command:
 
 ```bash
