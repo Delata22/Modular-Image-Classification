@@ -1,4 +1,4 @@
-# Modular Image Classification Framework for TELEMIS by Gurvan Estable
+# Modular Image Classification Framework by Gurvan Estable
 
 This project provides a robust and flexible architecture for training and using image classification models. Built on Docker, PyTorch Lightning, and Hydra, it is designed to be highly modular, allowing you to experiment with different datasets and model architectures with minimal friction.
 
