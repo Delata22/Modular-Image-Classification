@@ -29,6 +29,7 @@ Before you begin, ensure you have installed:
 
 Ensure your project follows this structure:
 
+```text
 .
 ├── configs/                        # Configuration files
 ├── data/                   
@@ -42,6 +43,7 @@ Ensure your project follows this structure:
 ├── Dockerfile
 ├── README.md
 └── requirements.txt
+```
 
 ### 2. Build and Run the Environment
 
@@ -72,6 +74,7 @@ Place your images in `data/raw_data/` following the `DATASET_NAME/CLASS_NAME/ima
 
 With a dataset called EXAMS of two classes (good, bad), the architecture will look like this :
 
+```text
 └── data/                   
     └── raw_data/                  
         └── EXAMS/             
@@ -83,7 +86,7 @@ With a dataset called EXAMS of two classes (good, bad), the architecture will lo
                 ├── bad_image_1.jpg  
                 ├── ...
                 └── bad_image_n.jpg  
-
+```
 
 ### Step 2: Run the Training Command
 
