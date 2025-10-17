@@ -79,9 +79,9 @@ With a dataset called EXAMS of two classes (good, bad), the architecture will lo
     └── raw_data/                  
         └── EXAMS/             
             ├── good          
-            |     ├── good_image_1.jpg  
-            |     ├── ...
-            |     └── good_image_n.jpg 
+            |   ├── good_image_1.jpg  
+            |   ├── ...
+            |   └── good_image_n.jpg 
             └── bad
                 ├── bad_image_1.jpg  
                 ├── ...
