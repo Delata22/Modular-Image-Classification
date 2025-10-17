@@ -123,7 +123,7 @@ First of all, put the images you want to use the model on in the **input/** fold
 After training, you will see at the end of the log a line like this:
 
 ```bash
-"Your model as been saved in the models/XXXX/XXXX/XXXX-XX-XX/XX-XX-XX directory"
+"Your model as been saved in the models/DATASET/CATEGORY/YY-MM-DD/hh-mm-ss directory"
 ```
 
 Copy the path said directory
@@ -133,7 +133,7 @@ Copy the path said directory
 Write the following command:
 
 ```bash
-docker exec modular-ai-app python -m src.predict md=models/XXXX/XXXX/XXXX-XX-XX/XX-XX-XX
+docker exec modular-ai-app python -m src.predict md=models/DATASET/CATEGORY/YY-MM-DD/hh-mm-ss
 ```
 
 Although not recommended, you can also directly put the model path in the **md** variable in the **configs/predict.yaml** file and simply write :
@@ -224,19 +224,19 @@ You can change the checkpoint strategy in the **configs/callbacks/default.yaml**
 If you want to make a prediction of a single file without moving it to the **input/** folder, you can do so by specifying its path in the command like this:
 
 ```bash
-docker exec modular-ai-app python -m src.predict md=models/XXXX/XXXX/XXXX-XX-XX/XX-XX-XX file=FILE_PATH
+docker exec modular-ai-app python -m src.predict md=models/DATASET/CATEGORY/YY-MM-DD/hh-mm-ss file=FILE_PATH
 ```
 
 In which case the **input/** folder will not be used for prediction.
 Like before, you can also directly put the filepath in the **configs/predict.yaml** file and remove the file argument from the command :
 
 ```bash
-docker exec modular-ai-app python -m src.predict md=models/XXXX/XXXX/XXXX-XX-XX/XX-XX-XX
+docker exec modular-ai-app python -m src.predict md=models/DATASET/CATEGORY/YY-MM-DD/hh-mm-ss
 ```
 
 ### Model sharing
 
-You can directly share a trained model to someone else possessing this script by copying the **models/XXXX/XXXX/XXXX-XX-XX/XX-XX-XX** folder.
+You can directly share a trained model to someone else possessing this script by copying the **models/DATASET/CATEGORY/YY-MM-DD/hh-mm-ss** folder.
 Then the receiver can put it back where he wants in the **models** folder, renaming it if he wants to, and use the following command:
 
 ```bash
