@@ -1,4 +1,4 @@
-# Modular Image Classification Framework by Gurvan Estable
+# Modular Image Classification Framework
 
 This project provides a robust and flexible architecture for training and using image classification models. Built on Docker, PyTorch Lightning, and Hydra, it is designed to be highly modular, allowing you to experiment with different datasets and model architectures with minimal friction.
 
@@ -243,3 +243,6 @@ Then the receiver can put it back where he wants in the **models** folder, renam
 docker exec modular-ai-app python -m src.predict md=models/MODEL_PATH
 ```
 
+# Author
+
+Gurvan Estable
